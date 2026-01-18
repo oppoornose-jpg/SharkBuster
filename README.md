@@ -6,3 +6,16 @@ those libraries
 pip3 install requests
 pip3 install colorama
 pip3 install aiohttp
+## ⬇ Clone & Install
+
+```bash
+# Clone
+git clone https://github.com/oppoornose-jpg/SharkBuster.git
+cd SharkBuster
+
+# Install dependencies
+pip3 install requests colorama aiohttp
+
+# Run
+python3 Shark.py
+```
