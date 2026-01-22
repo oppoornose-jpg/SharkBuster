@@ -41,7 +41,7 @@ print(Fore.YELLOW + "warning")
 print(RED + " you agreed using tool for educational purposes only " + RESET, name)
 colors = [Fore.RED, Fore.YELLOW, Fore.GREEN, Fore.CYAN, Fore.BLUE, Fore.MAGENTA, Fore.BLUE, Fore.RED,Fore.GREEN,Fore.BLACK,Fore.CYAN,Fore.RED, Fore.YELLOW, Fore.GREEN, Fore.CYAN, Fore.BLUE, Fore.MAGENTA, Fore.BLUE,Fore.RED, Fore.YELLOW, Fore.GREEN, Fore.CYAN, Fore.BLUE, Fore.MAGENTA, Fore.BLUE, Fore.RED,Fore.GREEN,Fore.BLACK,Fore.CYAN,Fore.RED, Fore.YELLOW, Fore.GREEN, Fore.CYAN, Fore.BLUE,Fore.CYAN]
 
-target_line = 5  # رقم السطر اللي بدك يطلع فيه النص
+target_line = 5  
 
 
 for color in colors:
