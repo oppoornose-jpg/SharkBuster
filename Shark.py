@@ -65,7 +65,7 @@ def check_update():
                 if os.path.isfile("version.txt"):
                     with open("version.txt", "r") as f:
                         V_local = f.read().strip()
-                    print(f"[*] Updated to version {V_local}")
+                    print(f"[*] Updated to version  {V_local} restart the tool manually")
                 else:
                     print("[!] version.txt not found after update")
             else:
