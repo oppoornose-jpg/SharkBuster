@@ -59,7 +59,7 @@ def check_update():
         if remote_version != V:
             print(f"[*] Update found! Local: {V} | Remote: {remote_version}")
             if os.path.isdir(".git"):
-                print("[*] Pulling latest version...")
+                print("[*] updating tool for  latest  version...")
                 os.system("git pull")
                 
                 if os.path.isfile("version.txt"):
@@ -70,7 +70,7 @@ def check_update():
                     print("[!] version.txt not found after update")
             else:
                 print("[!] Cannot auto-update, folder is not a git repository")
-            sys.exit(0)
+            
         else:
             print(f"[*] Tool is up-to-date (version {V})")
     except Exception as e:
