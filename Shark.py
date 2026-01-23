@@ -1,3 +1,20 @@
+try:
+    import requests, os, colorama, threading, time, asyncio, aiohttp
+except ImportError:
+            print(Fore.RED + "Error: missing libraries")
+            while True:
+                req = input("Do you want install required things? (yes/no): ").lower()
+                if req == "yes":
+                    print(Fore.CYAN + "installing...")
+                    print(Fore.YELLOW + "installing speed depends on your internet speed")
+                    os.system("sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq python3-requests python3-colorama python3-aiohttp")
+                    break
+                elif req == "no":
+                    exit()
+                    break
+                else:
+                    print(Fore.RED + "You must type yes or no")
+                    print(req) 
 import os
 from colorama import Fore, Style, init
 import requests
@@ -17,23 +34,7 @@ def boot():
     
 boot() 
 
-try:
-    import requests, os, colorama, threading, time, asyncio, aiohttp
-except ImportError:
-            print(Fore.RED + "Error: missing libraries")
-            while True:
-                req = input("Do you want install required things? (yes/no): ").lower()
-                if req == "yes":
-                    print(Fore.CYAN + "installing...")
-                    print(Fore.YELLOW + "installing speed depends on your internet speed")
-                    os.system("sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq python3-requests python3-colorama python3-aiohttp")
-                    break
-                elif req == "no":
-                    exit()
-                    break
-                else:
-                    print(Fore.RED + "You must type yes or no")
-                    print(req) 
+
                           
 
 def customize():
@@ -41,7 +42,13 @@ def customize():
 boot()
 os.system("clear")
 text = "AUTHOUR: Owis          "  
-V = "1.0.0"
+
+
+if os.path.isfile("version.txt"):
+    with open("version.txt", "r") as f:
+        V = f.read().strip()
+else:
+    V = "1.0.0"  
 
 def check_update():
     try:
@@ -49,18 +56,25 @@ def check_update():
         remote_version = requests.get(url, timeout=3).text.strip()
 
         if remote_version != V:
-            print("[*] Update found, updating...")
-            # تأكد أن المشروع git repo
+            print(f"[*] Update found! Local: {V} | Remote: {remote_version}")
             if os.path.isdir(".git"):
+                print("[*] Pulling latest version...")
                 os.system("git pull")
-                print("[*] Update completed, restart the tool")
+                
+                if os.path.isfile("version.txt"):
+                    with open("version.txt", "r") as f:
+                        V_local = f.read().strip()
+                    print(f"[*] Updated to version {V_local}")
+                else:
+                    print("[!] version.txt not found after update")
             else:
-                print("[!] Can't auto-update, this folder is not a git repository")
-            sys.exit(0)  # بديل آمن لـ exit()
+                print("[!] Cannot auto-update, folder is not a git repository")
+            sys.exit(0)
         else:
-            print("[*] Tool is up-to-date!")
+            print(f"[*] Tool is up-to-date (version {V})")
     except Exception as e:
         print(f"[!] Update check failed: {e}")
+
 
 check_update()
 while True:
