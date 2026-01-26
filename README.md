@@ -11,7 +11,7 @@ pip3 install colorama
 pip3 install aiohttp
 you must move paths file to SharkBuster file
 ## ⬇ Clone & Install
-⚠️⚠️ important:1- you must run tool with python or python3
+⚠️⚠️ important:1- you must run tool with python3
 2- Dont run tool with python2 its not suported and it will cause error
 3- if you have bug report it in issues.⚠️
 
