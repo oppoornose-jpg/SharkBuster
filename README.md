@@ -5,7 +5,7 @@ An tool for finding secret web paths or Discovery tool.
 Disclaimer: ⚠️you are responsible for your use of the tool ⚠️
 ![Python](https://img.shields.io/badge/Python-3.7%2B-blue)
 ![OS](https://img.shields.io/badge/Tested%20on-Kali%20Linux-green)
-![Purpose](https://img.shields.io/badge/For-Educational-red)
+![Purpose](https://img.shields.io/badge/For-legal-hacking-yellow)
 you must before cloning it download 
 those libraries
 pip3 install requests
