@@ -2,6 +2,7 @@
 try:
     import requests, os, colorama, threading, time, asyncio, aiohttp
 except ImportError:
+            from colorama import Fore
             print(Fore.RED + "Error: missing libraries")
             while True:
                 req = input("Do you want install required things? (yes/no): ").lower()
