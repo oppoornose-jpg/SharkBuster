@@ -50,7 +50,7 @@ if os.path.isfile("version.txt"):
     with open("version.txt", "r") as f:
         V = f.read().strip()
 else:
-    V = "2.0.5"
+    V = "2.0.6"
 
 def check_update():
     try:
@@ -71,7 +71,7 @@ def check_update():
                 else:
                     print("[!] version.txt not found after update")
                 
-                print(Fore.Cyan + "[*] updated  Please restart the tool manually.")
+                print(Fore.CYAN + "[*] updated  Please restart the tool manually.")
                 sys.exit(0)
 
             else:
