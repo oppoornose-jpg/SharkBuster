@@ -2,20 +2,20 @@
 try:
     import requests, os, colorama, threading, time, asyncio, aiohttp
 except ImportError:
-            from colorama import Fore
-            print(Fore.RED + "Error: missing libraries")
+            
+            print("Error: missing libraries")
             while True:
                 req = input("Do you want install required things? (yes/no): ").lower()
                 if req == "yes":
-                    print(Fore.CYAN + "installing...")
-                    print(Fore.YELLOW + "installing speed depends on your internet speed")
+                    print("installing...")
+                    print("installing speed depends on your internet speed")
                     os.system("sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq python3-requests python3-colorama python3-aiohttp")
                     break
                 elif req == "no":
                     exit()
                     break
                 else:
-                    print(Fore.RED + "You must type yes or no")
+                    print( "You must type yes or no ")
                     print(req) 
 import os
 from colorama import Fore, Style, init
@@ -50,7 +50,7 @@ if os.path.isfile("version.txt"):
     with open("version.txt", "r") as f:
         V = f.read().strip()
 else:
-    V = "2.0.1"  
+    V = "1.0.8"  
 
 def check_update():
     try:
@@ -71,7 +71,7 @@ def check_update():
                 else:
                     print("[!] version.txt not found after update")
                 
-                print("[*] Please restart the tool manually.")
+                print( Fore.Cyan + "[*] updated  Please restart the tool manually.")
                 sys.exit(0)
 
             else:
