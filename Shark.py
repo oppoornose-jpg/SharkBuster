@@ -63,7 +63,7 @@ Exec=python3 /home/kali/SharkBuster/Shark.py
 Icon=sharkbuster-web
 Terminal=true
 Type=Application
-Categories=Kali;Reconnaissance;
+Categories=Kali;Services;
 
 """
 
@@ -95,7 +95,7 @@ if os.path.isfile("version.txt"):
     with open("version.txt", "r") as f:
         V = f.read().strip()
 else:
-    V = "2.0.5"
+    V = "2.0.6"
 
 
 def check_update():
