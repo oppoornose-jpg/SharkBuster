@@ -28,6 +28,24 @@ import time
 import asyncio
 import aiohttp
 import atexit, signal
+import random
+ANDROID_UA = [
+    f"Mozilla/5.0 (Linux; Android {v}; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36"
+    for v in range(7, 16)
+]
+
+IOS_UA = [
+    f"Mozilla/5.0 (iPhone; CPU iPhone OS {v}_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/{v}.0 Mobile/15E148 Safari/604.1"
+    for v in range(6, 18)
+]
+
+DESKTOP_UA = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Firefox/121.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+]
+
+USER_AGENTS = ANDROID_UA + IOS_UA + DESKTOP_UA
 init(autoreset=True)
 results = []
 def save_progress():
@@ -104,7 +122,7 @@ if os.path.isfile("version.txt"):
     with open("version.txt", "r") as f:
         V = f.read().strip()
 else:
-    V = "2.0.3"
+    V = "2.0.4"
 
 
 def check_update():
@@ -187,9 +205,7 @@ while not host:
 
 ingored1= ("login", "signin", "auth")
 valid = {200,301,302,307,401,403,429}
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-}
+
 ingored = (".jpg", ".png", ".css", ".js", ".svg", ".ico")
 
 baseline = None   
@@ -199,7 +215,9 @@ print("status ",r.status_code)
 
 wordlist = input("wordlist file: ")
 while not wordlist or not os.path.isfile(wordlist):
+    k = "please check that you moved paths wordlist to SharkBuster file or wordlist exist"
     print(Fore.RED + "Invalid wordlist file")
+    print(Fore.YELLOW + k)
     wordlist = input("wordlist file: ")
 
 word = (Fore.GREEN + " wordlist: ")
@@ -231,6 +249,9 @@ async def check(session, p):
 
     async with sem:
         try:
+            headers = {
+               "User-Agent": random.choice(USER_AGENTS)
+            }
             async with session.get(
                 base + p.strip(),
                 timeout=aiohttp.ClientTimeout(total=3.7),
