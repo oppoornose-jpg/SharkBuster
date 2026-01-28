@@ -17,14 +17,13 @@ Disclaimer: ⚠️you are responsible for your use of the tool ⚠️
 - added tool in whisker menu for (kali linux , kali nethunter rootless on mobile , kali nethunter pc ,all kali versions)
   
   
-1 - 
-2 - 
+
 
 you must before cloning it download 
 those libraries
-pip3 install requests
-pip3 install colorama
-pip3 install aiohttp
+- pip3 install requests
+- pip3 install colorama
+- pip3 install aiohttp
 you must move paths file to SharkBuster file
 ## ⬇ Clone & Install
 ⚠️⚠️ important:1- you must run tool with python3
