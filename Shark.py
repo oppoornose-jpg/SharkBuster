@@ -104,7 +104,7 @@ if os.path.isfile("version.txt"):
     with open("version.txt", "r") as f:
         V = f.read().strip()
 else:
-    V = "2.0.8"
+    V = "2.0.9"
 
 
 def check_update():
@@ -200,7 +200,7 @@ print("status ",r.status_code)
 wordlist = input("wordlist file: ")
 while not wordlist or not os.path.isfile(wordlist):
     print(Fore.RED + "Invalid wordlist file")
-    print(wordlist)
+    wordlist = input("wordlist file: ")
 
 word = (Fore.GREEN + " wordlist: ")
 base = host.rstrip("/") + "/"
@@ -260,6 +260,8 @@ async def check(session, p):
                     color = status_color(r.status)
                     url = f"{base+p} {r.status}"
                     print(f"{color}{url}{Fore.RESET}")
+
+                if url not in results:
                     results.append(url)
 
         except Exception:
