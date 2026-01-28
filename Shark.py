@@ -10,7 +10,7 @@ except ImportError:
                     print("installing...")
                     print("installing speed depends on your internet speed")
                     os.system("sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq python3-requests python3-colorama python3-aiohttp")
-                    print("if you have an error install shutil library if its still report it in issues")
+                    print("if you have an error  if its still report it in issues")
                     break
                 elif req == "no":
                     print("you must install required things for running tool correctly.")
