@@ -27,7 +27,17 @@ import sys
 import time
 import asyncio
 import aiohttp
+import atexit, signal
 init(autoreset=True)
+results = []
+def save_progress():
+    if results:
+        with open("example.txt", "w") as f:
+            f.write("\n".join(results))
+        print("\nsaved progress results in example.txt")
+atexit.register(save_progress)
+signal.signal(signal.SIGTSTP, lambda s, f: exit())
+signal.signal(signal.SIGTERM, lambda s, f: exit())        
 def install_whisker_menu():
     
     import shutil
