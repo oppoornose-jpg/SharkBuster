@@ -301,6 +301,9 @@ async def run():
                "User-Agent": random.choice(USER_AGENTS)
             }
             async with session.get(
+                headers = {
+                   "User-Agent": random.choice(USER_AGENTS)
+                }
                 base + "random_not_exist_123456789",
                 timeout=aiohttp.ClientTimeout(total=3.7),
                 allow_redirects=False,
