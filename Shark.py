@@ -84,7 +84,7 @@ def check_update():
                 else:
                     print("[!] version.txt not found after update")
                 
-                print(Fore.CYAN + "[*] updated  Please restart the tool manually.")
+                print( "[*] updated  Please restart the tool manually.")
                 sys.exit(0)
 
             else:
