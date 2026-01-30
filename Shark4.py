@@ -146,7 +146,7 @@ print("trying with url "+ host + word ,wordlist)
 print()
 sys.stdout.write("\033[s")  
 sys.stdout.flush()
-sys.stdout.flush()
+
 sem = asyncio.Semaphore(200)
 lock = asyncio.Lock()
 start_time = time.time()
