@@ -17,7 +17,7 @@ Disclaimer: ⚠️you are responsible for your use of the tool ⚠️
 
 
 
-- New features added in version 2.0.8 :
+- New features added in version 2.0.6 :
 - Added launcher integration (Whisker Menu) for:
   - Kali Linux
   - Kali NetHunter Rootless (Mobile)
