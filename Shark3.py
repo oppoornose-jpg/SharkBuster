@@ -185,8 +185,8 @@ async def main():
     WORDLIST=load_wordlist()
 
     if mode=="BUG":
-        SEM=asyncio.Semaphore(32)
-        WORDLIST=WORDLIST[:64]
+        SEM=asyncio.Semaphore(60)
+        WORDLIST=WORDLIST[:694]
         print(CYAN+"Mode: Bug‑Bounty (Safe)\n"+RESET)
     else:
         SEM=asyncio.Semaphore(60)
