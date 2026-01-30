@@ -143,7 +143,7 @@ word = (Fore.GREEN + " wordlist: ")
 base = host.rstrip("/") + "/"
 print("trying with url "+ host + word ,wordlist)
 
-sem = asyncio.Semaphore(32)
+sem = asyncio.Semaphore(200)
 
 def status_color(code):
     if code == 200:
@@ -232,7 +232,7 @@ async def run():
 
         with open(wordlist, errors="ignore") as f:
             batch = []
-            batch_size = 62
+            batch_size = 200
 
             for line in f:
                 batch.append(line)
