@@ -18,8 +18,11 @@ Disclaimer: ⚠️you are responsible for your use of the tool ⚠️
 
 
 - New features added in version 2.0.8 :
-- maked speed for finding hiding paths for websites faster
-- added tool in whisker menu for (kali linux , kali nethunter rootless on mobile , kali nethunter pc ,all kali versions)
+- Added launcher integration (Whisker Menu) for:
+  - Kali Linux
+  - Kali NetHunter Rootless (Mobile)
+  - Kali NetHunter (PC)
+  - All Kali versions
   
   
 
