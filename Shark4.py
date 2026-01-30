@@ -225,7 +225,7 @@ async def check(session, p):
 
 
 async def run():
-    global baseline
+    global baseline, loaded
 
     connector = aiohttp.TCPConnector(limit=0)
     async with aiohttp.ClientSession(
