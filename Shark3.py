@@ -116,12 +116,27 @@ async def fetch(session,url):
             return None,None
 
 def risk(l): return {"Low":3,"Medium":6,"High":9}.get(l,0)
+async def check_path(session, base, path, baseline):
+    r, b = await fetch(session, base + path)
+    if r and r.status in (200, 401, 403) and len(b) != baseline:
+        results.append(("Secret Path", path, "Medium"))
+async def scan_wordlist(session, base, baseline):
+    batch = []
+    batch_size = SEM._value  
 
-async def scan_wordlist(session,base,baseline):
     for p in WORDLIST:
-        r,b=await fetch(session,base+p)
-        if r and r.status in (200,401,403) and len(b)!=baseline:
-            results.append(("secret Path",p,"Medium"))
+        batch.append(p)
+
+        if len(batch) == batch_size:
+            await asyncio.gather(
+                *(check_path(session, base, path, baseline) for path in batch)
+            )
+            batch.clear()
+
+    if batch:
+        await asyncio.gather(
+            *(check_path(session, base, path, baseline) for path in batch)
+        )
 
 async def scan_headers(session,base):
     r,_=await fetch(session,base)
@@ -202,12 +217,10 @@ async def main():
         print(f"{YELLOW}[{r[0]}]{RESET} {r[1]}  Risk:{r[2]}")
     print(GREEN+f"\nOverall Risk: {level} ({score})"+RESET)
 
-if __name__=="__main__":
-    asyncio.run(main())
 if __name__ == "__main__":
     try:
-        main()
+        asyncio.run(main())
     except KeyboardInterrupt:
         print("\n[!] Interrupted")
     finally:
-        input("\nended Press Enter if you want  return to launcher...")
+        input("\nended Press Enter if you want return to launcher...")
