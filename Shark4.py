@@ -128,7 +128,8 @@ valid = {200,301,302,307,401,403,429}
 ingored = (".jpg", ".png", ".css", ".js", ".svg", ".ico")
 
 baseline = None   
-
+tested = 0
+loaded = 0
 r = requests.get(host)
 print("status ",r.status_code)
 
@@ -145,11 +146,9 @@ print("trying with url "+ host + word ,wordlist)
 
 sem = asyncio.Semaphore(200)
 lock = asyncio.Lock()
-tested = 0
 start_time = time.time()
 
-with open(wordlist, errors="ignore") as f:
-    total_words = sum(1 for _ in f)
+
 def status_color(code):
     if code == 200:
         return Fore.GREEN
@@ -175,16 +174,15 @@ async def check(session, p):
         try:
             async with lock:
                 tested += 1
-                remaining = total_words - tested
                 speed = tested / max(time.time() - start_time, 1)
-
+ 
                 if tested % 100 == 0:
                     print(
-                        f"\r[>] Tried: {tested}/{total_words} | "
-                        f"Remaining: {remaining} | "
-                        f"Speed: {int(speed)} req/s",
-                        end="",
-                        flush=True
+                    f"\r[>] Tried: {tested} | "
+                    f"Loaded: {loaded} | "
+                    f"Speed: {int(speed)} req/s",
+                    end="",
+                    flush=True
                     )
             headers = {
                "User-Agent": random.choice(USER_AGENTS)
@@ -254,6 +252,8 @@ async def run():
 
             for line in f:
                 batch.append(line)
+                loaded += 1
+
                 if len(batch) == batch_size:
                     await asyncio.gather(*(check(session, p) for p in batch))
                     batch.clear()
