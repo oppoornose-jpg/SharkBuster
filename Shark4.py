@@ -176,14 +176,8 @@ async def check(session, p):
                 tested += 1
                 speed = tested / max(time.time() - start_time, 1)
  
-                if tested % 100 == 0:
-                    print(
-                    f"\r[>] Tried: {tested} | "
-                    f"Loaded: {loaded} | "
-                    f"Speed: {int(speed)} req/s",
-                    end="",
-                    flush=True
-                    )
+                sys.stdout.write(f"\r[>] Tried: {tested} | Loaded: {loaded} | Speed: {int(speed)} req/s")
+                sys.stdout.flush()
             headers = {
                "User-Agent": random.choice(USER_AGENTS)
             }
@@ -215,10 +209,10 @@ async def check(session, p):
                 if r.status in valid and r.status != 204:
                     color = status_color(r.status)
                     url = f"{base+p} {r.status}"
-                    print(f"{color}{url}{Fore.RESET}")
-
                     if url not in results:
                         results.append(url)
+                        sys.stdout.write("\n" + f"{color}{url}{Fore.RESET}")  
+                        sys.stdout.flush()
 
         except Exception:
             pass
