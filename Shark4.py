@@ -144,7 +144,12 @@ base = host.rstrip("/") + "/"
 print("trying with url "+ host + word ,wordlist)
 
 sem = asyncio.Semaphore(200)
+lock = asyncio.Lock()
+tested = 0
+start_time = time.time()
 
+with open(wordlist, errors="ignore") as f:
+    total_words = sum(1 for _ in f)
 def status_color(code):
     if code == 200:
         return Fore.GREEN
@@ -168,6 +173,19 @@ async def check(session, p):
 
     async with sem:
         try:
+            async with lock:
+                tested += 1
+                remaining = total_words - tested
+                speed = tested / max(time.time() - start_time, 1)
+
+                if tested % 100 == 0:
+                    print(
+                        f"\r[>] Tried: {tested}/{total_words} | "
+                        f"Remaining: {remaining} | "
+                        f"Speed: {int(speed)} req/s",
+                        end="",
+                        flush=True
+                    )
             headers = {
                "User-Agent": random.choice(USER_AGENTS)
             }
