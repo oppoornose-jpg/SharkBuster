@@ -196,7 +196,7 @@ async def main():
     base=validate_target(t)
     if not base:
         print(RED+"Invalid target"+RESET); sys.exit(1)
-
+    print(GREEN + f"SCANNING {t} ... please wait..." + RESET)
     async with aiohttp.ClientSession(timeout=TIMEOUT) as session:
         r,b=await fetch(session,base+"/__404_test__")
         baseline=len(b) if b else 0
