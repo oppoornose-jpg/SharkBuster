@@ -56,49 +56,7 @@ def save_progress():
 atexit.register(save_progress)
 signal.signal(signal.SIGTSTP, lambda s, f: exit())
 signal.signal(signal.SIGTERM, lambda s, f: exit())        
-def install_whisker_menu():
-    
-    import shutil
 
-    home = os.path.expanduser("~")
-    app_dir = os.path.join(home, ".local/share/applications")
-    icon_dir = os.path.join(home, ".local/share/icons")
-
-    os.makedirs(app_dir, exist_ok=True)
-    os.makedirs(icon_dir, exist_ok=True)
-
-    desktop_path = os.path.join(app_dir, "sharkbuster-web.desktop")
-    icon_target = os.path.join(icon_dir, "sharkbuster-web.png")
-
-    
-    if os.path.isfile(desktop_path):
-        return
-
-    
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    icon_source = os.path.join(script_dir, "image.png")
-
-    if not os.path.isfile(icon_source):
-        print("Icon image.png not found")
-        return
-
-    shutil.copy(icon_source, icon_target)
-
-    desktop_entry = f"""[Desktop Entry]
-Name=SharkBuster Web
-Comment=Web directory brute force tool
-Exec=python3 {os.path.abspath(__file__)}
-Icon=sharkbuster-web
-Terminal=true
-Type=Application
-Categories=Kali;Services and Other Tools;
-"""
-
-    with open(desktop_path, "w") as f:
-        f.write(desktop_entry)
-
-
-install_whisker_menu()
         
 
 def boot():
@@ -118,48 +76,9 @@ os.system("clear")
 text = "AUTHOUR: Owis          "  
 
 
-if os.path.isfile("version.txt"):
-    with open("version.txt", "r") as f:
-        V = f.read().strip()
-else:
-    V = "2.0.6"
 
 
-def check_update():
-    try:
-        url = "https://raw.githubusercontent.com/oppoornose-jpg/SharkBuster/main/version.txt"
-        remote_version = requests.get(url, timeout=3).text.strip()
 
-        if remote_version != V:
-            print(f"[*] Update found! Local: {V} | Remote: {remote_version}")
-
-            if os.path.isdir(".git"):
-                print("[*] Updating tool to latest version...")
-                os.system("git pull")
-                
-                if os.path.isfile("version.txt"):
-                    with open("version.txt", "r") as f:
-                        V_local = f.read().strip()
-                    print(f"[*] Updated to version {V_local}")
-                else:
-                    print("[!] version.txt not found after update")
-                
-                print(Fore.CYAN + "[*] updated  Please restart the tool manually.")
-                sys.exit(0)
-
-            else:
-                print("[!] Cannot auto-update, folder is not a git repository")
-                print("[*] If updated manually, please restart the tool.")
-                sys.exit(0)
-
-        else:
-            print(f"[*] Tool is up-to-date (version {V})")
-
-    except Exception as e:
-        print(f"[!] Update check failed: {e}")
-        sys.exit(0)
-
-check_update()
 while True:
     name = input(
         "just for using this tool you agree that is for educational purposes only "
