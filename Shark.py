@@ -43,7 +43,7 @@ def install_whisker_menu():
 
     desktop_entry = f"""[Desktop Entry]
 Name=SharkBuster Web
-Comment=Web directory brute force tool
+Comment=Web testing tool
 Exec=python3 {os.path.abspath(__file__)}
 Icon=sharkbuster-web
 Terminal=true
