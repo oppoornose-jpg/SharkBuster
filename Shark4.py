@@ -163,7 +163,7 @@ def status_color(code):
 
 
 async def check(session, p):
-    global baseline, loaded
+    global baseline, loaded, tested
 
     p = p.strip()
 
