@@ -221,7 +221,7 @@ async def check(session, p):
                         results.append(url)
                         sys.stdout.write("\n" + f"{color}{url}{Fore.RESET}")  
                         sys.stdout.flush()
-                        print_counter()
+                        
         except Exception:
             pass
 
