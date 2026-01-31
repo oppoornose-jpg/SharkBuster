@@ -7,7 +7,7 @@ It includes specialized modules , many tools with each module focusing on a spec
 Each internal tool focuses on a specifc task or domain.
 No external tools are required.
 
-This tool is designed for website testing and discovery purposes.
+
 Disclaimer: ⚠️you are responsible for your use of the tool ⚠️
 ![Python](https://img.shields.io/badge/Python-3.7%2B-blue)
 ![OS](https://img.shields.io/badge/Tested%20on-Kali%20Linux-green)
