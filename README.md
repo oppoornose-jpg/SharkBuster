@@ -52,7 +52,7 @@ git clone https://github.com/oppoornose-jpg/SharkBuster.git
 cd SharkBuster
 
 # Install dependencies
-pip3 install requests colorama aiohttp
+pip3 install -r requirements.txt
 
 
 # Run
