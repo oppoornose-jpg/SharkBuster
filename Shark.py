@@ -13,9 +13,19 @@ except ImportError:
 import os
 import sys
 import requests
+def cd_to_sharkbuster():
+    for root, dirs, files in os.walk("/"):
+        if "SharkBuster" in dirs:
+            path = os.path.join(root, "SharkBuster")
+            os.chdir(path)
+            print("Changed directory to:", os.getcwd())
+            return
+    print("SharkBuster folder not found")
+
+cd_to_sharkbuster()
 def install_whisker_menu():
     os.system("clear")
-    
+    os.system
     import shutil
 
     home = os.path.expanduser("~")
