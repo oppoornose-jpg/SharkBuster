@@ -148,7 +148,7 @@ while True:
     print(f"{CYAN}0){RESET} Exit")
     
     print(GREEN + "This tool automatically checks for updates and keeps itself up-to-date.")
-    print(GREEN + "Enjoy using it without any worries!")
+    print(GREEN + "Enjoy using it without any worries!", RESET)
     choice = input("\nChoose an option: ").strip()
 
     if choice == "1":
