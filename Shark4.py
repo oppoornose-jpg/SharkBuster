@@ -53,6 +53,7 @@ def save_progress():
         with open("results.txt", "w") as f:
             f.write("\n".join(results))
         print("\nsaved progress results in results.txt")
+        time.sleep(3.2)
 atexit.register(save_progress)
 signal.signal(signal.SIGTSTP, lambda s, f: exit())
 signal.signal(signal.SIGTERM, lambda s, f: exit())        
@@ -135,7 +136,7 @@ while not wordlist or not os.path.isfile(wordlist):
     print(Fore.RED + "Invalid wordlist file")
     print(Fore.YELLOW + k)
     wordlist = input("wordlist file: ")
-
+print(Fore.GREEN + "for stop ctrl + c note: dont press ctrl +z it will cause error.")
 word = (Fore.GREEN + " wordlist: ")
 base = host.rstrip("/") + "/"
 print("trying with url "+ host + word ,wordlist)
@@ -263,4 +264,4 @@ if __name__ == "__main__":
         print("\n[!] Interrupted")
     finally:
         input("\nPress Enter to return to launcher...")
-        time.sleep(4.5)
+        time.sleep(3)
