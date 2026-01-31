@@ -125,8 +125,7 @@ valid = {200,301,302,307,401,403,429}
 ingored = (".jpg", ".png", ".css", ".js", ".svg", ".ico")
 
 baseline = None   
-tested = 0
-loaded = 0
+
 r = requests.get(host)
 print("status ",r.status_code)
 
@@ -140,21 +139,12 @@ while not wordlist or not os.path.isfile(wordlist):
 word = (Fore.GREEN + " wordlist: ")
 base = host.rstrip("/") + "/"
 print("trying with url "+ host + word ,wordlist)
-print()
-sys.stdout.write("\033[s")  
-sys.stdout.flush()
+
 
 sem = asyncio.Semaphore(200)
 lock = asyncio.Lock()
 start_time = time.time()
-def print_counter():
-    speed = tested / max(time.time() - start_time, 1)
-    sys.stdout.write("\033[u")  
-    sys.stdout.write("\033[2K")   
-    sys.stdout.write(
-        f"[>] Tried: {tested} | Loaded: {loaded} | Speed: {int(speed)} req/s"
-    )
-    sys.stdout.flush()
+
 def status_color(code):
     if code == 200:
         return Fore.GREEN
@@ -169,7 +159,7 @@ def status_color(code):
 
 
 async def check(session, p):
-    global baseline, loaded, tested
+    global baseline
 
     p = p.strip()
 
@@ -178,9 +168,7 @@ async def check(session, p):
 
     async with sem:
         try:
-            async with lock:
-                tested += 1
-                print_counter()
+            
  
                 
             headers = {
@@ -220,7 +208,7 @@ async def check(session, p):
 
 
 async def run():
-    global baseline, loaded
+    global baseline
 
     connector = aiohttp.TCPConnector(limit=0)
     async with aiohttp.ClientSession(
@@ -242,39 +230,29 @@ async def run():
        
 
         with open(wordlist, errors="ignore") as f:
-            batch = []
+            tasks = []
             batch_size = 200
 
             for line in f:
-                batch.append(line)
-                loaded += 1
+                tasks.append(asyncio.create_task(check(session, line)))
 
-                if len(batch) == batch_size:
-                    results_batch = await asyncio.gather(*(check(session, p) for p in batch))
-
-                    async with lock:
-                        for res in results_batch:
-                            if res:
-                                print(res)
-                                results.append(res)
-                        print_counter()
-
-                    batch.clear()
-        
-            if batch:
-                results_batch = await asyncio.gather(
-                    *(check(session, p) for p in batch)
-                )
-
-                async with lock:
+                if len(tasks) >= batch_size:
+                    results_batch = await asyncio.gather(*tasks)
                     for res in results_batch:
                         if res:
                             print(res)
                             results.append(res)
-                    print_counter()
+                    tasks.clear()
 
-                batch.clear()
+    
+        if tasks:
+            results_batch = await asyncio.gather(*tasks)
+            for res in results_batch:
+                if res:
+                    print(res)
+                    results.append(res)
 
+                
 
 def main():
     asyncio.run(run())
