@@ -17,14 +17,11 @@ import sys
 import requests
 import shutil
 def cd_to_sharkbuster():
-    for root, dirs, files in os.walk("/"):
-        if "SharkBuster" in dirs:
-            path = os.path.join(root, "SharkBuster")
-            os.chdir(path)
-            print("Changed directory to:", os.getcwd())
-            return
-    print("SharkBuster folder not found")
-
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    if not os.path.isdir(base_dir):
+        print("[!] SharkBuster directory not found")
+        sys.exit(1)
+    os.chdir(base_dir)
 cd_to_sharkbuster()
 def customize():
     os.system("clear")
