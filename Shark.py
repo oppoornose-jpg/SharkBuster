@@ -71,7 +71,7 @@ if os.path.isfile("version.txt"):
     with open("version.txt", "r") as f:
         V = f.read().strip()
 else:
-    V = "2.2.4"
+    V = "28362918.0.1"
 
 
 def check_update():
