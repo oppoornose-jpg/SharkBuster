@@ -71,7 +71,7 @@ if os.path.isfile("version.txt"):
     with open("version.txt", "r") as f:
         V = f.read().strip()
 else:
-    V = "9.5.2"
+    V = "9.5.3"
 
 
 def check_update():
