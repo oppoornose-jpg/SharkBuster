@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+import asyncio
 REQUIRED = ["numpy"]
 os.system("clear")
 
