@@ -142,6 +142,7 @@ while True:
     print(YELLOW + "=== Shark Tools Launcher ===" + RESET)
     print(f"{CYAN}1){RESET} SharkBuster-web - Web Discovery Fast Tool for finding secret web paths like gobuster")
     print(f"{CYAN}2){RESET} SharkBuster-Scan - tool for scanning websites.")
+    print(f"{CYAN}3){RESET} SharkBuster-AI - an chat AI from SharkBuster ")
     print(f"{CYAN}0){RESET} Exit")
     
     print(GREEN + "This tool automatically checks for updates and keeps itself up-to-date.")
@@ -155,5 +156,7 @@ while True:
     elif choice == "0":
         print(GREEN + "exited" + RESET)
         sys.exit()
+    elif choice == "3":
+        os.system("python3 Shark5.py")
     else:
         input(RED + "Invalid choice, press Enter..." + RESET)
